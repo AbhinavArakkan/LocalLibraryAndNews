@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Images</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .heading {
+            text-align: center;
+        }
+
+        .collage-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .image-item {
+            width: 48%; /* Adjust width as needed */
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            .image-item {
+                width: 100%;
+            }
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        @media (min-width: 601px){
+            .sidebar a:first-child {
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar a {
+                font-size: 20px;
+            }
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            left: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Overlay styles */
+        .overlay {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: transparent;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            text-align: center;
+            font-size: 40px;
+            z-index: 1;
+            text-decoration: none;
+        }
+
+        .home-button.close {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .heading {
+                font-size: 20px;
+            }
+
+            .home-button {
+                font-size: 25px;
+                top: 5px;
+                left: 10px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="mySidebar" class="sidebar">
+        <a href="{% url 'home' %}" class="button">Home</a>
+        <a href="{% url 'news' %}" class="button">വാർത്തകൾ</a>
+        <a href="{% url 'history' %}" class="button">ചരിത്രം</a>
+        <a href="{% url 'images' %}" class="button images-button">Images</a>
+        <a href="https://chat.whatsapp.com/ETsgAItUZu77stfHUU6rOO" class="button whatsapp-button">WhatsApp</a>
+        <a href="tel:9895834295" class="button call-button">Call</a>
+        <a href="mailto:yvsk3508@gmail.com" class="button email-button">Email</a>
+    </div>
+
+    <div class="overlay" onclick="closeNav()"></div>
+
+    <a href="javascript:void(0)" class="home-button" id="openButton" onclick="openNav()">&#8801;</a>
+    <a href="javascript:void(0)" class="home-button close" id="closeButton" onclick="closeNav()">&#8801;</a>
+
+    <header>
+        <h1 class="heading" id="typing-heading"></h1>
+    </header>
+
+    <div class="container">
+        <div class="collage-container">
+            {% for img in imgs %}
+            <div class="image-item">
+                <img src="{{ img.img.url }}" alt="Image">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        const headingElement = document.getElementById("typing-heading");
+        const textToType = "യുവജന വായനശാല & ഗ്രന്ഥാലയം കമ്പിൽ";
+        let i = 0;
+
+        function typeHeading() {
+            if (i < textToType.length) {
+                headingElement.innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeHeading, 40);
+            }
+        }
+
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("openButton").style.display = "none";
+            document.getElementById("closeButton").style.display = "block";
+            document.querySelector(".overlay").style.display = "block";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("openButton").style.display = "block";
+            document.getElementById("closeButton").style.display = "none";
+            document.querySelector(".overlay").style.display = "none";
+        }
+
+        typeHeading();
+    </script>
+</body>
+
+</html>

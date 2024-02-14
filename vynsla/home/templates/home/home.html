@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>യുവജന വായനശാല & ഗ്രന്ഥാലയം</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .heading {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in-out;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            flex: 1;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .library-section {
+            color: #333;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .library-hours {
+            font-size: 28px;
+            margin-bottom: 10px;
+            position: relative;
+            color: black;
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            background-color: #fff;
+        }
+
+        .library-hours-bg {
+            background-color: black;
+            display: inline-block;
+            border-radius: 15px;
+            padding: 5px 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-bottom: 20px;
+            margin-top: 30px;
+        }
+
+        .library-hours-text {
+            color: white;
+            font-size: 25px;
+        }
+
+        .book-count {
+            font-size: 48px;
+            font-weight: bold;
+            animation: countTo10k 1s ease-in-out forwards;
+        }
+
+        .plus-sign {
+            font-size: 48px;
+            font-weight: bold;
+            vertical-align: top;
+        }
+
+        .bottom-section {
+            text-align: center;
+            position:relative;
+            padding-left: 150px;
+            padding-right: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 20px;
+            margin-top: 100px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+            flex-wrap: wrap;
+        }
+
+        .person {
+            text-align: center;
+            margin: 0 20px;
+        }
+
+        .person img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        .small-image-mobile {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .person p.position {
+            margin-top: 4px !important;
+            margin-bottom: 1px;
+            color: #888;
+            font-size: 12px;
+        }
+
+        .person p.name {
+            font-weight: bold;
+            margin-top: 0 !important;
+            color: #333;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes countTo10k {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .bottom-section {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+
+        /* Media query for screens with a maximum width of 600px */
+        @media (max-width: 600px) {
+            .heading {
+                font-size: 24px;
+            }
+
+            .person img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .buttons {
+                margin-top: 10px;
+            }
+
+            .button {
+                padding: 8px 16px;
+                font-size: 15px;
+            }
+
+            .library-section {
+                padding: 20px 0;
+            }
+
+            .library-hours {
+                font-size: 22px;
+            }
+
+            .library-hours-text {
+                font-size: 18px;
+            }
+
+            .book-count {
+                font-size: 32px;
+            }
+
+            .plus-sign {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="heading" id="typing-heading"></h1>
+    </header>
+    <div class="container">
+        <div class="buttons">
+            <a href="{% url 'history' %}" class="button">ചരിത്രം</a>
+            <a href="{% url 'news' %}" class="button">വാർത്തകൾ</a>
+            <a href="{% url 'images' %}" class="button images-button">Images</a>
+            <a href="https://chat.whatsapp.com/ETsgAItUZu77stfHUU6rOO" class="button whatsapp-button">WhatsApp</a>
+            <a href="tel:9895834295" class="button call-button">Call</a>
+            <a href="mailto:yvsk3508@gmail.com" class="button email-button">Email</a>
+        </div>
+    </div>
+    
+    <!-- Library Section -->
+    <div class="library-section">
+        <div class="library-hours-bg">
+            <span class="library-hours-text">Library Hours: 5:00 PM to 7:00 PM</span>
+        </div>
+        <br>
+        Total Number of Books: <span class="book-count" id="book-count">9950</span><span class="plus-sign">+</span>
+    </div>
+
+    <!-- Members Section -->
+    <div class="bottom-section"> 
+        {% for member in members %}
+            <div class="person">
+                <img src="{{ member.img.url }}" alt="{{ member.position }}" class="small-image-mobile">
+                <p class="position">{{ member.position }}</p>
+                <p class="name">{{ member.name }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        // Typing effect for the heading
+        const headingElement = document.getElementById("typing-heading");
+        const textToType = "യുവജന വായനശാല & ഗ്രന്ഥാലയം കമ്പിൽ";
+        let i = 0;
+
+        function typeHeading() {
+            if (i < textToType.length) {
+                headingElement.innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeHeading, 40);
+            }
+        }
+
+        typeHeading();
+
+        // Counting animation for the book count
+        const bookCountElement = document.getElementById("book-count");
+        let count = 9940;
+
+        function countTo10k() {
+            if (count < 10000) {
+                count++;
+                bookCountElement.textContent = count;
+                setTimeout(countTo10k, 10);
+            }
+        }
+
+        countTo10k();
+    </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ news_item.headline }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .news-detail-container {
+            background-color: #ffffff2c;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .news-detail-container img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .heading-date-container {
+            background-color: #6c69692c;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            word-wrap: break-word;
+            
+        }
+
+
+        .heading-date-container p {
+            font-size: 14px; /* Adjust font size as needed */
+            color: #999; /* Light color */
+            margin: 0; /* Remove default margin */
+            text-align: left; /* Left-align the date and time */
+            
+        }
+
+        .content-container p {
+            line-height: 1.6;
+            word-wrap: break-word;
+        }
+
+        @media (max-width: 600px) {
+            .news-detail-container img {
+                width: 100%;
+                height: auto;
+                margin-bottom: 1px;
+            }
+            .heading-date-container h2{
+                margin-top: 1px;
+                margin-bottom: 1px;
+                font-size: 20px;
+            }
+            .heading-date-container p{
+                font-size: 11px;
+                margin-top: 5px;
+            }
+
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            color: white;
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        @media (min-width: 601px) {
+            .sidebar a:first-child {
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sidebar a {
+                font-size: 20px;
+            }
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            left: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        /* Overlay styles */
+        .overlay {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+        /* Home button styles */
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: transparent;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            text-align: center;
+            font-size: 40px;
+            z-index: 1;
+            text-decoration: none;
+        }
+
+        .home-button.close {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .heading {
+                font-size: 24px;
+            }
+
+            .home-button {
+                font-size: 28px;
+                top: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 class="heading" id="typing-heading">വാർത്തകൾ</h1>
+    </header>
+    <div class="container">
+        <!-- News detail section -->
+        <div class="news-detail-container">
+            <img src="{{ news_item.image.url }}" alt="{{ news_item.headline }}">
+            <div class="heading-date-container">
+                <h2>{{ news_item.headline }}</h2>
+                <p>{{ news_item.uploaded_date }}</p>
+            </div>
+            <div class="content-container">
+                <p>{{ news_item.content }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar and overlay -->
+    <div id="mySidebar" class="sidebar">
+        <a href="{% url 'home' %}" class="button">Home</a>
+        <a href="{% url 'news' %}" class="button">വാർത്തകൾ</a>
+        <a href="{% url 'history' %}" class="button">ചരിത്രം</a>
+        <a href="{% url 'images' %}" class="button images-button">Images</a>
+        <a href="https://chat.whatsapp.com/ETsgAItUZu77stfHUU6rOO" class="button whatsapp-button">WhatsApp</a>
+        <a href="tel:9895834295" class="button call-button">Call</a>
+        <a href="mailto:yvsk3508@gmail.com" class="button email-button">Email</a>
+    </div>
+
+    <div class="overlay" onclick="closeNav()"></div>
+
+    <!-- Home button -->
+    <a href="javascript:void(0)" class="home-button" id="openButton" onclick="openNav()">&#8801;</a>
+    <a href="javascript:void(0)" class="home-button close" id="closeButton" onclick="closeNav()">&#8801;</a>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("openButton").style.display = "none";
+            document.getElementById("closeButton").style.display = "block";
+            document.querySelector(".overlay").style.display = "block";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("openButton").style.display = "block";
+            document.getElementById("closeButton").style.display = "none";
+            document.querySelector(".overlay").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
