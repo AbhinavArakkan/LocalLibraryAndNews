@@ -14,7 +14,8 @@ def News(request):
     return render(request, 'home/news.html',{'news_list':news_list})
 
 def Images(request):
-    imgs = images.objects.all()
+    imgs = list(images.objects.all())
+    imgs.reverse()    
     return render(request, 'home/images.html',{'imgs':imgs})
 
 def history(request):

@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&display=swap">
     <title>വാർത്തകൾ</title>
     <style>
         body {
@@ -51,14 +53,18 @@
 
         .heading-date-container h3{
             margin-bottom: 5px;
+            font-size: 16px;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+            font-weight: 1000;
+            letter-spacing: -.0123cm;
         }
 
         .heading-date-container p {
             font-size: 14px; /* Adjust font size as needed */
-            color: #999; /* Light color */
+            color: #7f7f7f; /* Light color */
             margin: 0; /* Remove default margin */
             text-align: left; /* Left-align the date and time */
-            
+            font-family: 'OCR A Std', monospace;
         }  
 
 
@@ -80,13 +86,13 @@
             }
 
             .heading-date-container p{
-                font-size: 11px;
+                font-size: 12px;
                 margin-top: 1px;
             }   
             .heading-date-container h3{
                 margin-top: 5px;
                 margin-bottom: 5px;
-                font-size: 20px;
+                font-size: 14px;
             }         
         }
 
@@ -144,6 +150,11 @@
             color: #818181;
             display: block;
             transition: 0.3s;
+            font-family: 'OCR A Std', monospace;
+        }
+
+        #history {
+            font-family: 'Manjari', sans-serif;
         }
 
         @media (min-width: 601px){
@@ -186,7 +197,7 @@
 <body>
     <div id="mySidebar" class="sidebar">
         <a href="{% url 'home' %}" class="button">Home</a>
-        <a href="{% url 'history' %}" class="button">ചരിത്രം</a>
+        <a href="{% url 'history' %}" class="button" id="history">ചരിത്രം</a>
         <a href="{% url 'images' %}" class="button images-button">Images</a>
         <a href="https://chat.whatsapp.com/ETsgAItUZu77stfHUU6rOO" class="button whatsapp-button">WhatsApp</a>
         <a href="tel:9895834295" class="button call-button">Call</a>

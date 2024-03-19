@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&display=swap">
     <title>Images</title>
     <style>
         body {
@@ -33,27 +34,84 @@
         .collage-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: flex-start;
+            cursor: pointer;
+            margin-left: 20px;
         }
 
         .image-item {
-            width: 48%; /* Adjust width as needed */
-            margin-bottom: 10px;
+            width: calc(25% - 20px); /* Adjust width as needed */
+            margin-bottom: 20px;
             box-sizing: border-box;
+            position: relative;
+            flex-basis: calc(25% - 20px); /* Adjust width as needed */
+            margin-right: 20px;
+        }
+
+        .image-item:last-child {
+            margin-right: 0; /* Remove right margin for the last item in each row */
         }
 
         .image-item img {
             width: 100%;
-            height: auto;
+            height: 100%; /* Ensure images fill the square */
+            object-fit: cover; /* Ensure images cover the square */
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        @media (max-width: 600px) {
-            .image-item {
-                width: 100%;
-            }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            text-align: center;
+            padding-top: 20px;
         }
+
+        .lightbox img {
+            max-width: 80%;
+            max-height: 80%;
+            margin: auto;
+            border-radius: 5px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
 
         /* Sidebar styles */
         .sidebar {
@@ -77,6 +135,11 @@
             color: #818181;
             display: block;
             transition: 0.3s;
+            font-family: 'OCR A Std', monospace;
+        }
+
+        #malayalam {
+            font-family: 'Manjari', sans-serif;
         }
 
         @media (min-width: 601px){
@@ -137,12 +200,33 @@
         @media (max-width: 600px) {
             .heading {
                 font-size: 20px;
+                margin-left: 30px;
+                margin-right: 30px;
             }
 
             .home-button {
                 font-size: 25px;
                 top: 5px;
                 left: 10px;
+            }
+
+            .collage-container {
+                margin-left: 10px;
+            }
+
+            .image-item {
+                width: calc(25% - 10px); /* Adjust width as needed */
+                flex-basis: calc(25% - 10px); /* Adjust width as needed */
+                margin-bottom: 15px;
+                margin-right: 10px;
+            }
+
+        }
+
+        @media (max-width: 1000px) {
+            .heading {
+                margin-left: 55px;
+                margin-right: 55px;
             }
         }
 
@@ -152,9 +236,8 @@
 <body>
     <div id="mySidebar" class="sidebar">
         <a href="{% url 'home' %}" class="button">Home</a>
-        <a href="{% url 'news' %}" class="button">വാർത്തകൾ</a>
-        <a href="{% url 'history' %}" class="button">ചരിത്രം</a>
-        <a href="{% url 'images' %}" class="button images-button">Images</a>
+        <a href="{% url 'news' %}" class="button" id="malayalam">വാർത്തകൾ</a>
+        <a href="{% url 'history' %}" class="button" id="malayalam">ചരിത്രം</a>
         <a href="https://chat.whatsapp.com/ETsgAItUZu77stfHUU6rOO" class="button whatsapp-button">WhatsApp</a>
         <a href="tel:9895834295" class="button call-button">Call</a>
         <a href="mailto:yvsk3508@gmail.com" class="button email-button">Email</a>
@@ -172,11 +255,18 @@
     <div class="container">
         <div class="collage-container">
             {% for img in imgs %}
-            <div class="image-item">
+            <div class="image-item" onclick="openLightbox()">
                 <img src="{{ img.img.url }}" alt="Image">
             </div>
             {% endfor %}
         </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <img src="" alt="Image" id="lightbox-img">
+        <span class="prev" onclick="prevImage()">&#10094;</span>
+        <span class="next" onclick="nextImage()">&#10095;</span>
     </div>
 
     <script>
@@ -207,6 +297,37 @@
         }
 
         typeHeading();
+
+        let currentIndex = 0;
+        const images = document.querySelectorAll(".image-item img");
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+
+        function openLightbox() {
+            currentIndex = Array.from(images).indexOf(event.target);
+            lightbox.style.display = "block";
+            lightboxImg.src = images[currentIndex].src;
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = "none";
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            lightboxImg.src = images[currentIndex].src;
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            lightboxImg.src = images[currentIndex].src;
+        }
+
+        lightbox.addEventListener("click", function(event) {
+            if (event.target === this) {
+                closeLightbox();
+            }
+        });
     </script>
 </body>
 

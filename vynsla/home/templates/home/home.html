@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&display=swap">
     <title>യുവജന വായനശാല & ഗ്രന്ഥാലയം</title>
     <style>
         body {
@@ -10,6 +12,11 @@
             background-color: #f0f0f0;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
         }
 
         header {
@@ -27,8 +34,12 @@
 
         .heading {
             text-align: center;
-            font-size: 32px;
+            font-size: 48px;
             margin-bottom: 20px;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+            font-weight: 1000;
+            padding-left:20px ;
+            padding-right: 20px;
         }
 
         .buttons {
@@ -41,15 +52,25 @@
         }
 
         .button {
+            font-family: 'Manjari', sans-serif;
+            font-size: 22px;
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             margin: 5px;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;
             flex: 1;
             text-decoration: none;
+        }
+
+        .images-button,
+        .whatsapp-button,
+        .call-button,
+        .email-button {
+            font-family: 'OCR A Std', monospace;
+            font-size: 20px;
         }
 
         .button:hover {
@@ -58,8 +79,10 @@
 
         .library-section {
             color: #333;
+            font-family: monospace;
             text-align: center;
-            padding: 40px 0;
+            padding: 20px 0;
+            font-size: 20px;
         }
 
         .library-hours {
@@ -77,7 +100,7 @@
             background-color: black;
             display: inline-block;
             border-radius: 15px;
-            padding: 5px 10px;
+            padding: 10px 18px;
             margin-left: 10px;
             margin-right: 10px;
             margin-bottom: 20px;
@@ -87,6 +110,9 @@
         .library-hours-text {
             color: white;
             font-size: 25px;
+            font-family: monospace;
+            word-spacing: -1px;
+            letter-spacing: -1px;
         }
 
         .book-count {
@@ -104,8 +130,8 @@
         .bottom-section {
             text-align: center;
             position:relative;
-            padding-left: 150px;
-            padding-right: 150px;
+            padding-left: 250px;
+            padding-right: 250px;
             display: flex;
             justify-content: center;
             align-items: flex-end;
@@ -136,14 +162,47 @@
         .person p.position {
             margin-top: 4px !important;
             margin-bottom: 1px;
-            color: #888;
-            font-size: 12px;
+            color: #686868;
+            font-size: 13px;
+            font-family: 'Tahoma', sans-serif;
+
         }
 
         .person p.name {
             font-weight: bold;
             margin-top: 0 !important;
-            color: #333;
+            color: #1b1b1b;
+            font-family: 'Noto Sans Malayalam', sans-serif;
+            font-weight: bold;
+        }
+
+        #map {
+            width: 50vw; /* Half of the screen width */
+            height: 25vw; /* Set height equal to the width */
+            margin-left: 50vw; /* Adjust the margin as needed */
+            margin-top: 100px;
+        }
+
+        .copyright {
+            color: #000000;
+            font-family: 'OCR A Std', monospace;
+            margin-left: 10vw;
+            margin-top: -15vw;
+            position: relative;
+        }
+
+        .copyright::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -10px; /* Adjust the distance between the line and the text as needed */
+            width: 2px; /* Adjust the width of the line as needed */
+            height: 100%;
+            background-color: #000000; /* Line color */
+        }
+
+        .copyright p {
+            padding-left: 20px; /* Adjust the padding to create space between the line and text */
         }
 
         @keyframes fadeIn {
@@ -166,20 +225,54 @@
 
         @media (max-width: 1200px) {
             .bottom-section {
-                padding-left: 0;
-                padding-right: 0;
+                padding-left: 80px;
+                padding-right: 80px;
+            }
+
+            .copyright {
+                color: #000000;
+                font-family: 'OCR A Std', monospace;
+                margin-left: 5vw;
+                margin-top: -24vw;
+                position: relative;
+                font-size: 13px;
+                width: 45vw;
+            }
+
+            .copyright::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -5px; /* Adjust the distance between the line and the text as needed */
+                width: 1px; /* Adjust the width of the line as needed */
+                height: 100%;
+                background-color: #010101; /* Line color */
+            }
+
+            .copyright p {
+                padding-left: 10px; /* Adjust the padding to create space between the line and text */
             }
         }
 
         /* Media query for screens with a maximum width of 600px */
         @media (max-width: 600px) {
             .heading {
-                font-size: 24px;
+                font-size: 28px;
+            }
+
+            .person {
+                margin: 0 10px;
             }
 
             .person img {
-                width: 50px;
-                height: 50px;
+                width: 55px;
+                height: 55px;
+            }
+
+            .bottom-section {
+                padding-left: 0;
+                padding-right: 0;
+                margin-top: 50px;
             }
 
             .buttons {
@@ -188,11 +281,20 @@
 
             .button {
                 padding: 8px 16px;
-                font-size: 15px;
+                font-size: 19px;
+            }
+
+            .images-button,
+            .whatsapp-button,
+            .call-button,
+            .email-button {
+                font-size: 17px;
             }
 
             .library-section {
                 padding: 20px 0;
+                margin-top: -40px;
+                font-size: 18px;
             }
 
             .library-hours {
@@ -210,7 +312,45 @@
             .plus-sign {
                 font-size: 32px;
             }
+
+            .person p.name {
+                font-size: 15px;
+            }
+
+            #map {
+                width: 50vw; /* Half of the screen width */
+                height: 40vw; /* Set height equal to the width */
+                margin-left: 50vw; /* Adjust the margin as needed */
+                margin-top: 50px;
+            }
+
+            .copyright {
+                color: #000000;
+                font-family: 'OCR A Std', monospace;
+                margin-left: 5vw;
+                margin-top: -35vw;
+                position: relative;
+                font-size: 10px;
+                width: 45vw;
+            }
+
+            .copyright::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -5px; /* Adjust the distance between the line and the text as needed */
+                width: 1px; /* Adjust the width of the line as needed */
+                height: 100%;
+                background-color: #010101; /* Line color */
+            }
+
+            .copyright p {
+                padding-left: 10px; /* Adjust the padding to create space between the line and text */
+            }
+
         }
+
+
     </style>
 </head>
 <body>
@@ -234,7 +374,7 @@
             <span class="library-hours-text">Library Hours: 5:00 PM to 7:00 PM</span>
         </div>
         <br>
-        Total Number of Books: <span class="book-count" id="book-count">9950</span><span class="plus-sign">+</span>
+        Total Books: <span class="book-count" id="book-count">9950</span><span class="plus-sign">+</span>
     </div>
 
     <!-- Members Section -->
@@ -248,6 +388,23 @@
         {% endfor %}
     </div>
 
+
+
+    <iframe
+        id="map"
+        style="border: 0"
+        loading="lazy"
+        allowfullscreen
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1968.0731118458553!2d75.39404814585286!3d11.966430993880976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba43f5d01ee2ba1%3A0x949c279c41b189f0!2sYuvajana%20Vayanasala%20%26%20Grandhalayam%20Kambil!5e0!3m2!1sen!2sin!4v1647615696953!5m2!1sen!2sin">
+    </iframe>
+
+    <div class="copyright">
+        <p>&copy;Yuvajana Vayanashala & Grandhalayam Kambil</p>
+        <p>Since 1983</p>
+        <p>Reg No: 3508</p>
+        <p>Email: yvsk3508@gmail.com</p>
+        <p>Kambil, Kannur | 670601</p>
+    </div>
     <script>
         // Typing effect for the heading
         const headingElement = document.getElementById("typing-heading");

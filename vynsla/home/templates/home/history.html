@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;700&display=swap">
     <title>Images</title>
     <style>
         body {
@@ -12,6 +14,45 @@
             margin: 0;
             padding: 0;
         }
+
+        .history {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .history-container {
+        position: relative; /* Position relative for absolute positioning of lines */
+        background-color: #f9f1da; /* Color of old paper */
+        padding: 30px; /* Add some padding */
+        margin-top: 30px; /* Adjust margin as needed */
+        border: 2px solid #d4c29e; /* Border color */
+        border-left: none;
+        box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.5); /* Add shadow for depth on right and bottom sides */
+        font-family: 'Noto Sans Malayalam', sans-serif;
+        font-size: 18px; /* Adjust font size */
+        line-height: 1.8; /* Adjust line height */
+        }
+
+        @media (max-width: 600px) {
+            .history-container {
+                line-height: 1.4;
+                font-size: 16px;
+            }
+        }
+
+
+        .history-container::after {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -5px; /* Adjust position to match your desired wire-o binding location */
+            width: 8px; /* Width of the binding */
+            height: calc(100% + 4px); /* Height of the container */
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.05) 52%, transparent 54%); /* Binding gradient */
+            background-size: 100% 20px; /* Size of the lines */
+            box-shadow: 5px 0 8px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+        }
+
 
         header {
             background-color: #4CAF50;
@@ -28,31 +69,6 @@
 
         .heading {
             text-align: center;
-        }
-
-        .collage-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .image-item {
-            width: 48%; /* Adjust width as needed */
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        .image-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        @media (max-width: 600px) {
-            .image-item {
-                width: 100%;
-            }
         }
 
         /* Sidebar styles */
@@ -77,6 +93,11 @@
             color: #818181;
             display: block;
             transition: 0.3s;
+            font-family: 'OCR A Std', monospace;
+        }
+
+        #malayalam {
+            font-family: 'Manjari', sans-serif;
         }
 
         @media (min-width: 601px){
@@ -88,6 +109,16 @@
         @media (max-width: 600px) {
             .sidebar a {
                 font-size: 20px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .history {
+                margin-left: 8%;
+                margin-top: 20px;
+                margin-right: 8%;
+                margin-bottom: 30px;
+                box-shadow: 10px 15px 30px rgba(0, 0, 0, 0.5); /* Add shadow for depth on right and bottom sides */
             }
         }
 
@@ -152,8 +183,7 @@
 <body>
     <div id="mySidebar" class="sidebar">
         <a href="{% url 'home' %}" class="button">Home</a>
-        <a href="{% url 'news' %}" class="button">വാർത്തകൾ</a>
-        <a href="{% url 'history' %}" class="button">ചരിത്രം</a>
+        <a href="{% url 'news' %}" class="button" id="malayalam">വാർത്തകൾ</a>
         <a href="{% url 'images' %}" class="button images-button">Images</a>
         <a href="https://chat.whatsapp.com/ETsgAItUZu77stfHUU6rOO" class="button whatsapp-button">WhatsApp</a>
         <a href="tel:9895834295" class="button call-button">Call</a>
@@ -168,15 +198,13 @@
     <header>
         <h1 class="heading" id="typing-heading"></h1>
     </header>
-
-    <div class="container">
-        <div class="collage-container">
-            {% for img in imgs %}
-            <div class="image-item">
-                <img src="{{ img.img.url }}" alt="Image">
+    
+    <div class="history">
+            <div class="container history-container">
+                <p class="history-text">
+                    ആർത്രൊപ്പോഡ ജന്തുഫൈലത്തിലെ ഒരു വർഗമാണ് ഡിപ്ളൊപോഡ. ഈ വർഗ്ഗം മിറിയാപോഡ എന്നും അറിയപ്പെട്ടിരുന്നു. ഉരുണ്ടുനീണ്ട ശരീരത്തിനിരുവശത്തുമായി അനേകം ജോടി കാലുകൾ ഉള്ളതുകൊണ്ടാണ് ഇവയ്ക്ക് ഇങ്ങനെ പേരു നൽകിയത്. ശരീരത്തിലാകെ വ്യാപിച്ചു കിടക്കുന്ന ശ്വാസനാളീവ്യൂഹത്തിലൂടെയാണ് ശ്വസനം നിർവഹിക്കുന്നത്. സ്ഥിരവാസം കരയിലാണെങ്കിലും, മുട്ട വിരിയുന്നതിന് ഈർപ്പം ആവശ്യമാണ്. ഇരുട്ടിലും, വിവിധ വസ്തുക്കളുടെ മടക്കുകൾ, ഇടുക്കുകൾ എന്നിവിടങ്ങളിലുമാണ് ഡിപ്ലൊപോഡകൾ കൂടുതൽ കാണപ്പെടുന്നത്. മുഖ്യഭക്ഷണം ജീർണവസ്തുക്കളാണ്. ഏറ്റവും അറിയപ്പെടുന്ന ഡിപ്ലൊപോഡ് തേരട്ടയാണ്. ഷഡ്പദങ്ങൾ, ക്രസ്റ്റേഷ്യനുകൾ എന്നിവയെപ്പോലെ ഇവയുടെ ശരീരത്തിനും ശിരസ്സ്, വക്ഷം, ഉദരം എന്നീ മൂന്നു ഭാഗങ്ങളുണ്ട്. ശിരസ്സു വ്യതിരിക്തമാണ്. ലളിതവും എട്ടു ഖണ്ഡങ്ങളുള്ളതുമായ ഒരു ജോടി ശൃംഗിക, ശക്തമായ രണ്ടു ചിബുകാസ്ഥികൾ, ഇരയെ പിടിക്കാനും ചവച്ചരയ്ക്കാനുമുതകുന്ന നാത്തൊകിലേറിയം എന്നീ അവയവങ്ങൾ ശിരസ്സിലുണ്ട്. പുഴുവിന്റേതുപോലെ ദീർഘിച്ചു ഇഴയുന്ന ദേഹത്തിൽ വക്ഷസ്സും ഉദരവും തമ്മിലുള്ള വ്യത്യാസം പലപ്പോഴും പ്രകടമല്ല. ശരീരം മോതിരം പോലുള്ള അനേകം സമാന സിലിറാകാര ഖണ്ഡങ്ങൾ (ഡിപ്പൊസൊമൈറ്റുകൾ) ചേർന്നതാണ്. ചിലതരം തേരട കണ്ണൂർ ജില്ലയിൽ
+                </p>
             </div>
-            {% endfor %}
-        </div>
     </div>
 
     <script>
@@ -197,6 +225,7 @@
             document.getElementById("openButton").style.display = "none";
             document.getElementById("closeButton").style.display = "block";
             document.querySelector(".overlay").style.display = "block";
+            document.body.style.overflow = "hidden";
         }
 
         function closeNav() {
@@ -204,9 +233,11 @@
             document.getElementById("openButton").style.display = "block";
             document.getElementById("closeButton").style.display = "none";
             document.querySelector(".overlay").style.display = "none";
+            document.body.style.overflow = "auto";
         }
 
         typeHeading();
+
     </script>
 </body>
 
