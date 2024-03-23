@@ -245,6 +245,7 @@
             document.getElementById("openButton").style.display = "none";
             document.getElementById("closeButton").style.display = "block";
             document.querySelector(".overlay").style.display = "block";
+            document.body.style.overflow = "hidden";
         }
 
         function closeNav() {
@@ -252,6 +253,7 @@
             document.getElementById("openButton").style.display = "block";
             document.getElementById("closeButton").style.display = "none";
             document.querySelector(".overlay").style.display = "none";
+            document.body.style.overflow = "auto";
         }
 
         typeHeading();
