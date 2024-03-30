@@ -13,4 +13,3 @@ class MemberAdmin(admin.ModelAdmin):
 
 
 
-#yvsk Yvsk@111
